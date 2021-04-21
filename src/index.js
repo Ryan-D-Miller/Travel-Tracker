@@ -5,7 +5,7 @@
 import './css/base.scss';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
-import './images/turing-logo.png'
+// import './images/turing-logo.png'
 
 const getDestinationData = () => fetch("http://localhost:3001/api/v1/destinations")
     .then(response => checkForError(response))
