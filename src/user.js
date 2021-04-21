@@ -23,14 +23,13 @@ class User {
         return this.trips[tripIndex];
     }
 
-    tripCost(tripID) {
-        const trip = this.getTrip(tripID);
+    tripCost(trip) {
         return (trip.duration * trip.destinationInfo.estimatedLodgingCostPerDay) + (trip.travelers * trip.destinationInfo.estimatedFlightCostPerPerson)
     }
 
     totalTripCost() {
         const totalCost = this.trips.reduce((acc, trip) => {
-            return acc + this.tripCost(trip.id);
+            return acc + this.tripCost(trip);
         }, 0);
         return totalCost;
     }

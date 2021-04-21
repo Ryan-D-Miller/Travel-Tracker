@@ -183,8 +183,8 @@ describe('User', function() {
         expect(user.getTrip(75)).to.equal("No Trip Found!");
     });
     it('should be able to return the cost of a specified trip', function() {
-        expect(user.tripCost(user.trips[0].id)).to.equal(960);
-        expect(user.tripCost(user.trips[1].id)).to.equal(6010);
+        expect(user.tripCost(user.trips[0])).to.equal(960);
+        expect(user.tripCost(user.trips[1])).to.equal(6010);
     });
     it('should calculate the total cost of all trips for a user', function() {
         expect(user.totalTripCost()).to.equal(6970);
