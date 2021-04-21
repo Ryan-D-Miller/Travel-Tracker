@@ -161,4 +161,29 @@ describe('User', function() {
             }
         }]);
     });
+    it('should be able to return a trip specified by an ID', function() {
+        expect(user.getTrip(1)).to.eql({
+            "id": 1,
+            "userID": 3,
+            "destinationID": 1,
+            "travelers": 1,
+            "date": "2019/09/16",
+            "duration": 8,
+            "status": "approved",
+            "suggestedActivities": [],
+            "destinationInfo": {
+                "id": 1,
+                "destination": "Lima, Peru",
+                "estimatedLodgingCostPerDay": 70,
+                "estimatedFlightCostPerPerson": 400,
+                "image": "https://images.unsplash.com/photo-1489171084589-9b5031ebcf9b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80",
+                "alt": "overview of city buildings with a clear sky"
+            }
+        })
+        expect(user.getTrip(75)).to.equal("No Trip Found!");
+    });
+    it('should be able to return the cost of a specified trip', function() {
+        expect(user.tripCost(user.trips[0].id)).to.equal(960);
+        expect(user.tripCost(user.trips[1].id)).to.equal(6010);
+    });
 });

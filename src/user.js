@@ -14,6 +14,19 @@ class User {
         });
         return myTrips;
     }
+
+    getTrip(tripID) {
+        const tripIndex = this.trips.findIndex(trip => trip.id === tripID);
+        if(tripIndex === -1) {
+            return "No Trip Found!"
+        }
+        return this.trips[tripIndex];
+    }
+
+    tripCost(tripID) {
+        const trip = this.getTrip(tripID);
+        return (trip.duration * trip.destinationInfo.estimatedLodgingCostPerDay) + (trip.travelers * trip.destinationInfo.estimatedFlightCostPerPerson)
+    }
 }
 
 export default User;
