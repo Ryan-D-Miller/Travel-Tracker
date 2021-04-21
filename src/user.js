@@ -24,7 +24,11 @@ class User {
     }
 
     tripCost(trip) {
-        return (trip.duration * trip.destinationInfo.estimatedLodgingCostPerDay) + (trip.travelers * trip.destinationInfo.estimatedFlightCostPerPerson)
+        let tenPercent;
+        let cost = (trip.duration * trip.destinationInfo.estimatedLodgingCostPerDay) + (trip.travelers * trip.destinationInfo.estimatedFlightCostPerPerson)
+        tenPercent = cost * .1;
+        cost = cost + tenPercent;
+        return cost;
     }
 
     totalTripCost() {
