@@ -27,6 +27,13 @@ class User {
         const trip = this.getTrip(tripID);
         return (trip.duration * trip.destinationInfo.estimatedLodgingCostPerDay) + (trip.travelers * trip.destinationInfo.estimatedFlightCostPerPerson)
     }
+
+    totalTripCost() {
+        const totalCost = this.trips.reduce((acc, trip) => {
+            return acc + this.tripCost(trip.id);
+        }, 0);
+        return totalCost;
+    }
 }
 
 export default User;
