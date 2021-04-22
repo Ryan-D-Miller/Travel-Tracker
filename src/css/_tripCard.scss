@@ -38,3 +38,19 @@
     background-color: rgb(212, 145, 0);
     padding: .5rem;
 } 
+
+@media screen and (max-width: 770px) {
+    .trip-cards {
+        display: grid;
+        grid-gap: 1rem;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .trip-cards {
+        display: grid;
+        grid-gap: 1rem;
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
