@@ -4,12 +4,16 @@ label {
 
 form {
     display: flex;
-
     padding: 1rem;
 }
 
 form div {
-    padding: 1rem;
+    padding: 0 5% 0 0;
+}
+
+input, select {
+    @include roundCorners();
+    height: 2rem;
 }
 
 .trip-request {
@@ -21,10 +25,20 @@ form div {
 
 .trip-request-section {
     display: flex;
-    align-content: center;
-    justify-content: center;
+    align-content: space-around;
+    justify-content: space-around;
     background-image: url('https://i0.wp.com/getwallpapers.com/wallpaper/full/2/1/c/177792.jpg');
     background-size: 100% 100%;
     padding: 3rem;
-    @include shadowBox();
+}
+
+.submit {
+    margin-left: 45%;
+    margin-bottom: .5rem;
+    background: $button-color;
+    color: white;
+}
+
+.error {
+    color: $error-color;
 }
