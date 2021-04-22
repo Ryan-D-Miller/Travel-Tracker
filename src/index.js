@@ -1,11 +1,7 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
-
-// An example of how you tell webpack to use a CSS (SCSS) file
 import './css/index.scss';
+import domUpdates from './domUpdates';
+import User from './User';
 
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
-// import './images/turing-logo.png'
 
 const getDestinationData = () => fetch("http://localhost:3001/api/v1/destinations")
     .then(response => checkForError(response))
@@ -31,7 +27,7 @@ const checkForError = response => {
     }
 }
 
-let travelerData, tripData, destinationData;
+let travelerData, tripData, destinationData, user;
 
 
 window.onload = onStartup();
@@ -39,11 +35,11 @@ window.onload = onStartup();
 function onStartup() {
     getData()
         .then(([getTravelerData, getTripData, getDestinationData])=> {
-            travelerData = getTravelerData;
-            tripData = getTripData;
-            destinationData = getDestinationData;
-            console.log(travelerData);
-            console.log(tripData);
-            console.log(destinationData);
+            travelerData = getTravelerData
+            tripData = getTripData
+            destinationData = getDestinationData
+            user = new User(travelerData.travelers[20], tripData.trips, destinationData.destinations)
+            domUpdates.displayTrips(user);
+            domUpdates.greetUser(user);
         });
 }
