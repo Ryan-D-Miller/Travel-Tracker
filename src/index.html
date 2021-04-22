@@ -12,16 +12,24 @@
     <main>
       <section id="tripRequest" class="trip-request">
         <form class="request-box">
-          <label>Choice Departure Data</label>
-          <input placeholder="Check-in">
-          <label>Duration of Vaction</label>
-          <input placeholder="Duartion">
-          <label>Number of Guests</label>
-          <input placeholder="# Guests">
-          <label for="tripSelection">Choose Destination</label>
-          <select id="tripSelection">
-            <option value="">--Please choose Destination--</option>
-          </select>
+          <div>
+            <label for="checkIn">Choice Departure Data</label>
+            <input type="date" id="checkIn" placeholder="Check-in">
+          </div>
+          <div>
+            <label for="duration">Duration of Vaction</label>
+            <input type="number" id="duration" placeholder="Duartion">
+          </div>
+          <div>
+            <label for="numberGuests">Number of Guests</label>
+            <input type="number" id="numberGuests" placeholder="# Guests">
+          </div>
+          <div>
+            <label for="tripSelection">Choose Destination</label>
+            <select id="tripSelection">
+              <option value="">--Please choose Destination--</option>
+            </select>
+          </div>
         </form>
       </section>
       <section id="tripSection">
