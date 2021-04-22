@@ -1,11 +1,6 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
-
-// An example of how you tell webpack to use a CSS (SCSS) file
 import './css/index.scss';
+import 
 
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
-// import './images/turing-logo.png'
 
 const getDestinationData = () => fetch("http://localhost:3001/api/v1/destinations")
     .then(response => checkForError(response))
@@ -42,8 +37,6 @@ function onStartup() {
             travelerData = getTravelerData;
             tripData = getTripData;
             destinationData = getDestinationData;
-            console.log(travelerData);
-            console.log(tripData);
-            console.log(destinationData);
+            
         });
 }
