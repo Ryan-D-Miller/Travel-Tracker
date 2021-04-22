@@ -4,7 +4,7 @@ let domUpdates = {
     displayDestinations(destinationData) {
         const tripSlection = document.getElementById('tripSelection');
         destinationData.destinations.forEach(destination => {
-            tripSlection.insertAdjacentHTML('afterbegin', `<option value=${destination.destination}>${destination.destination}</option>`)
+            tripSlection.insertAdjacentHTML('afterbegin', `<option value=${destination.id}>${destination.destination}</option>`)
         });
     },
     displayTrips(user) {

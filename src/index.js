@@ -2,6 +2,8 @@ import './css/index.scss';
 import domUpdates from './domUpdates';
 import User from './User';
 
+const submitButton = document.getElementById('tripRequestSubmit');
+
 
 const getDestinationData = () => fetch("http://localhost:3001/api/v1/destinations")
     .then(response => checkForError(response))
@@ -29,6 +31,7 @@ const checkForError = response => {
 
 let travelerData, tripData, destinationData, user;
 
+submitButton.addEventListener('click', submitTripForm);
 
 window.onload = onStartup();
 
@@ -43,4 +46,45 @@ function onStartup() {
             domUpdates.displayTrips(user);
             domUpdates.greetUser(user);
         });
+}
+
+function submitTripForm() {
+    let checkIn = document.getElementById('checkIn').value;
+    const durationTrip = document.getElementById('duration').value;
+    const numberGuest = document.getElementById('numberGuests').value;
+    const destID = document.getElementById('tripSelection').value;
+    checkIn = checkIn.replaceAll('-', '/');
+    const tripObj = {
+        id: Date.now(),
+        userID: user.id,
+        destinationID: Number(destID),
+        travelers: Number(numberGuest),
+        date: checkIn,
+        duration: Number(durationTrip),
+        status: 'pending',
+        suggestedActivities: []
+    };
+    document.getElementById('checkIn').value = "";
+    document.getElementById('duration').value = "";
+    document.getElementById('numberGuests').value = "";
+    document.getElementById('tripSelection').value = "";
+    return fetch("http://localhost:3001/api/v1/trips", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(tripObj)
+    })
+        .then(response => {
+            checkForError(response)
+        })
+        .then(response => updateUser(tripObj))
+        .catch(err => console.log(`POST Request Error: ${err.message}`))
+}
+
+function updateUser(tripObj) {
+    tripData.trips.push(tripObj);
+    user.trips = user.findMyTrips(tripData.trips, destinationData.destinations);
+    domUpdates.displayTrips(user);
+    domUpdates.greetUser(user);
 }

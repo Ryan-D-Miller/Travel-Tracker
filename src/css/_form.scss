@@ -26,4 +26,5 @@ form div {
     background-image: url('https://i0.wp.com/getwallpapers.com/wallpaper/full/2/1/c/177792.jpg');
     background-size: 100% 100%;
     padding: 3rem;
+    @include shadowBox();
 }
