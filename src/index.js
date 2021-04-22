@@ -38,7 +38,8 @@ function onStartup() {
             travelerData = getTravelerData
             tripData = getTripData
             destinationData = getDestinationData
-            user = new User(travelerData.travelers[20], tripData.trips, destinationData.destinations)
+            domUpdates.displayDestinations(destinationData)
+            user = new User(travelerData.travelers[2], tripData.trips, destinationData.destinations)
             domUpdates.displayTrips(user);
             domUpdates.greetUser(user);
         });
