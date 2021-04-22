@@ -1,3 +1,19 @@
 body {
   background: $primary-background;
 }
+
+.main-header {
+  background: $header-color;
+  margin: 0px;
+  padding: 2rem;
+}
+
+h1 {
+  margin: 0;
+  color: white;
+}
+
+h4 {
+  color: rgb(58, 57, 57);
+  margin-left: 1rem;
+}

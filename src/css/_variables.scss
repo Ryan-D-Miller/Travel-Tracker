@@ -1,6 +1,13 @@
-$primary-background: rgb(151, 189, 247);
+$primary-background: #d7f0f8;
+$header-color: #0091C7;
+$button-color: #005A7A;
+$error-color: rgb(204, 6, 6);
 
 @mixin shadowBox() {
     border-radius: .5rem;
     box-shadow: 0px 0px 12px black;
+}
+
+@mixin roundCorners() {
+    border-radius: .5rem;
 }

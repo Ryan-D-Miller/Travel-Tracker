@@ -4,12 +4,18 @@ label {
 
 form {
     display: flex;
-
+    align-content: space-evenly;
+    justify-content: space-evenly;
     padding: 1rem;
 }
 
 form div {
-    padding: 1rem;
+    padding: 0 5% 0 0;
+}
+
+input, select {
+    @include roundCorners();
+    height: 2rem;
 }
 
 .trip-request {
@@ -26,5 +32,38 @@ form div {
     background-image: url('https://i0.wp.com/getwallpapers.com/wallpaper/full/2/1/c/177792.jpg');
     background-size: 100% 100%;
     padding: 3rem;
-    @include shadowBox();
+}
+
+.submit {
+
+    margin-bottom: .5rem;
+    background: $button-color;
+    color: white;
+}
+.submit-section {
+    display: flex;
+    justify-content: center;
+}
+
+.error {
+    color: $error-color;
+}
+
+h3 {
+    display: flex;
+    justify-content: center;
+    font-size: 1.5em;
+}
+
+@media screen and (max-width: 900px) {
+    form {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 620px) {
+    form {
+        display: inline;
+    }
 }

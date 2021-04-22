@@ -49,37 +49,44 @@ function onStartup() {
 }
 
 function submitTripForm() {
-    let checkIn = document.getElementById('checkIn').value;
-    const durationTrip = document.getElementById('duration').value;
-    const numberGuest = document.getElementById('numberGuests').value;
-    const destID = document.getElementById('tripSelection').value;
-    checkIn = checkIn.replaceAll('-', '/');
-    const tripObj = {
-        id: Date.now(),
-        userID: user.id,
-        destinationID: Number(destID),
-        travelers: Number(numberGuest),
-        date: checkIn,
-        duration: Number(durationTrip),
-        status: 'pending',
-        suggestedActivities: []
-    };
-    document.getElementById('checkIn').value = "";
-    document.getElementById('duration').value = "";
-    document.getElementById('numberGuests').value = "";
-    document.getElementById('tripSelection').value = "";
-    return fetch("http://localhost:3001/api/v1/trips", {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(tripObj)
-    })
-        .then(response => {
-            checkForError(response)
+    domUpdates.removeErrors();
+    const checkInEle = document.getElementById('checkIn');
+    const durationEle = document.getElementById('duration');
+    const guestEle = document.getElementById('numberGuests');
+    const destEle = document.getElementById('tripSelection');
+    if (domUpdates.checkIfFilledIn(checkInEle, durationEle, guestEle, destEle)) {
+        let checkIn = checkInEle.value;
+        const durationTrip = durationEle.value;
+        const numberGuest = guestEle.value;
+        const destID = destEle.value;
+        checkIn = checkIn.replaceAll('-', '/');
+        const tripObj = {
+            id: Date.now(),
+            userID: user.id,
+            destinationID: Number(destID),
+            travelers: Number(numberGuest),
+            date: checkIn,
+            duration: Number(durationTrip),
+            status: 'pending',
+            suggestedActivities: []
+        };
+        checkInEle.value = "";
+        durationEle.value = "";
+        guestEle.value = "";
+        destEle.value = "";
+        return fetch("http://localhost:3001/api/v1/trips", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(tripObj)
         })
-        .then(response => updateUser(tripObj))
-        .catch(err => console.log(`POST Request Error: ${err.message}`))
+            .then(response => {
+                checkForError(response)
+            })
+            .then(response => updateUser(tripObj))
+            .catch(err => console.log(`POST Request Error: ${err.message}`))
+    }
 }
 
 function updateUser(tripObj) {

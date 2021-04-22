@@ -5,9 +5,7 @@
   </head>
   <body>
     <header class="main-header">
-      <nav>
         <h1 id="welcomeMessage">Welcome</h1>
-      </nav>
     </header>
     <main>
       <section class="trip-request-section">
@@ -17,23 +15,29 @@
             <div>
               <label for="checkIn">Choice Departure Data</label>
               <input type="date" id="checkIn" placeholder="Check-in">
+              <p class="error" id="checkInError"></p>
             </div>
             <div>
               <label for="duration">Duration of Vaction</label>
               <input type="number" id="duration" placeholder="Duartion">
+              <p class="error" id="durationError"></p>
             </div>
             <div>
               <label for="numberGuests">Number of Guests</label>
               <input type="number" id="numberGuests" placeholder="# Guests">
+              <p class="error" id="guestError"></p>
             </div>
             <div>
               <label for="tripSelection">Choose Destination</label>
               <select id="tripSelection">
                 <option value="">--Please choose Destination--</option>
               </select>
+              <p class="error" id="destError"></p>
             </div>
           </form>
-          <input id="tripRequestSubmit" type="submit">
+          <div class="submit-section">
+            <input aria-label="submit-button" value="Submit" class="submit" id="tripRequestSubmit" type="submit">
+          </div>
         </section>
       </section>
       <section id="tripSection">
