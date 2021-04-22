@@ -10,22 +10,35 @@
       </nav>
     </header>
     <main>
-      <section id="tripSection">
-        <h4 id=tripCost>Total Amount Spent On Trips: $7587.00</h4>
-        <section class="trip-cards" id="tripCards">
-          <section class="trip-card" style="background-image: url('https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80');">
-            <header class="trip-header">
-              <strong>Sydney, Austrailia</strong>
-              <p>Trip Cost: 1056</p>
-            </header>
-            <div class="trip-body">
-              <strong>Status: Approved</strong>
-              <p>Number of Travelers: 1</p>
-              <p>Departure Date: "2019/09/16"</p>
-              <p>Days on Vacation: 8</p>
-              <p>Cost of Trip: 6611</p>
+      <section class="trip-request-section">
+        <section id="tripRequest" class="trip-request">
+          <h3>Book a new trip!</h3>
+          <form class="request-box">
+            <div>
+              <label for="checkIn">Choice Departure Data</label>
+              <input type="date" id="checkIn" placeholder="Check-in">
             </div>
-          </section>
+            <div>
+              <label for="duration">Duration of Vaction</label>
+              <input type="number" id="duration" placeholder="Duartion">
+            </div>
+            <div>
+              <label for="numberGuests">Number of Guests</label>
+              <input type="number" id="numberGuests" placeholder="# Guests">
+            </div>
+            <div>
+              <label for="tripSelection">Choose Destination</label>
+              <select id="tripSelection">
+                <option value="">--Please choose Destination--</option>
+              </select>
+            </div>
+          </form>
+          <input id="tripRequestSubmit" type="submit">
+        </section>
+      </section>
+      <section id="tripSection">
+        <h4 id=tripCost>Total Amount Spent On Trips:</h4>
+        <section class="trip-cards" id="tripCards">
         </section>
       </section>
     </main>

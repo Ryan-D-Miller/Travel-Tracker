@@ -1,6 +1,12 @@
 const cardArea = document.getElementById('tripCards');
 
 let domUpdates = {
+    displayDestinations(destinationData) {
+        const tripSlection = document.getElementById('tripSelection');
+        destinationData.destinations.forEach(destination => {
+            tripSlection.insertAdjacentHTML('afterbegin', `<option value=${destination.id}>${destination.destination}</option>`)
+        });
+    },
     displayTrips(user) {
         cardArea.innerHTML = "";
         user.trips.forEach(trip => {
