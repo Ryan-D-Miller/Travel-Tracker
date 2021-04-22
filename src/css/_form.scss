@@ -1,7 +1,29 @@
 label {
-    display: block; 
+    display: block;
 }
 
 form {
     display: flex;
+
+    padding: 1rem;
+}
+
+form div {
+    padding: 1rem;
+}
+
+.trip-request {
+    background-color: white;
+    @include shadowBox();
+    padding: .5rem 1rem 0 1rem;
+    width: 88%;
+}
+
+.trip-request-section {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    background-image: url('https://i0.wp.com/getwallpapers.com/wallpaper/full/2/1/c/177792.jpg');
+    background-size: 100% 100%;
+    padding: 3rem;
 }

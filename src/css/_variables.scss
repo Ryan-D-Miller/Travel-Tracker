@@ -1,0 +1,6 @@
+$primary-background: rgb(151, 189, 247);
+
+@mixin shadowBox() {
+    border-radius: .5rem;
+    box-shadow: 0px 0px 8px black;
+}

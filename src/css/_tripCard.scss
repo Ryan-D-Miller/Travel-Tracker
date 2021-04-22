@@ -15,9 +15,7 @@
 .trip-card {
     color: white;
     text-shadow: 2px 1px black;
-    background-color: white;
-    border-radius: .5rem;
-    box-shadow: 0px 0px 8px black;
+    @include shadowBox();
     background-size: 100% 100%;
     opacity: .80;
 }

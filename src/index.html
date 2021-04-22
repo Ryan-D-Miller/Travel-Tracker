@@ -10,27 +10,31 @@
       </nav>
     </header>
     <main>
-      <section id="tripRequest" class="trip-request">
-        <form class="request-box">
-          <div>
-            <label for="checkIn">Choice Departure Data</label>
-            <input type="date" id="checkIn" placeholder="Check-in">
-          </div>
-          <div>
-            <label for="duration">Duration of Vaction</label>
-            <input type="number" id="duration" placeholder="Duartion">
-          </div>
-          <div>
-            <label for="numberGuests">Number of Guests</label>
-            <input type="number" id="numberGuests" placeholder="# Guests">
-          </div>
-          <div>
-            <label for="tripSelection">Choose Destination</label>
-            <select id="tripSelection">
-              <option value="">--Please choose Destination--</option>
-            </select>
-          </div>
-        </form>
+      <section class="trip-request-section">
+        <section id="tripRequest" class="trip-request">
+          <h3>Book a new trip!</h3>
+          <form class="request-box">
+            <div>
+              <label for="checkIn">Choice Departure Data</label>
+              <input type="date" id="checkIn" placeholder="Check-in">
+            </div>
+            <div>
+              <label for="duration">Duration of Vaction</label>
+              <input type="number" id="duration" placeholder="Duartion">
+            </div>
+            <div>
+              <label for="numberGuests">Number of Guests</label>
+              <input type="number" id="numberGuests" placeholder="# Guests">
+            </div>
+            <div>
+              <label for="tripSelection">Choose Destination</label>
+              <select id="tripSelection">
+                <option value="">--Please choose Destination--</option>
+              </select>
+            </div>
+          </form>
+          <input type="submit">
+        </section>
       </section>
       <section id="tripSection">
         <h4 id=tripCost>Total Amount Spent On Trips: $7587.00</h4>
