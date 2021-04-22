@@ -30,6 +30,32 @@ let domUpdates = {
         const tripCost = document.getElementById('tripCost');
         greeting.innerText = `Welcome ${user.name}!`
         tripCost.innerText = `Total Amount Spent On Trips: $${user.totalTripCost()}`
+    }, 
+    checkIfFilledIn(checkInEle, durationEle, guestEle, destEle) {
+        let filledIn = true;
+        if(checkInEle.value.length === 0) {
+            document.getElementById('checkInError').innerText = "*Please Select A Data";
+            filledIn = false;
+        }
+        if (durationEle.value.length === 0) {
+            document.getElementById('durationError').innerText = "*Please Choose Length of Stay";
+            filledIn = false;
+        }
+        if (guestEle.value.length === 0) {
+            document.getElementById('guestError').innerText = "*Please Choose Number of Guests";
+            filledIn = false;
+        }
+        if (destEle.value.length === 0) {
+            document.getElementById('destError').innerText = "*Please Choose A Destination";
+            filledIn = false;
+        }
+        return filledIn;
+    },
+    removeErrors() {
+        document.getElementById('checkInError').innerText = "";
+        document.getElementById('durationError').innerText = "";
+        document.getElementById('guestError').innerText = "";
+        document.getElementById('destError').innerText = "";
     }
 }
 
