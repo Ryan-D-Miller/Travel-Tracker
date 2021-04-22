@@ -5,9 +5,7 @@
   </head>
   <body>
     <header class="main-header">
-      <nav>
         <h1 id="welcomeMessage">Welcome</h1>
-      </nav>
     </header>
     <main>
       <section class="trip-request-section">
@@ -37,7 +35,9 @@
               <p class="error" id="destError"></p>
             </div>
           </form>
-          <input class="submit" id="tripRequestSubmit" type="submit">
+          <div class="submit-section">
+            <input aria-label="submit-button" value="Submit" class="submit" id="tripRequestSubmit" type="submit">
+          </div>
         </section>
       </section>
       <section id="tripSection">
