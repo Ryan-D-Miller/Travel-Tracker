@@ -4,10 +4,32 @@
     <title>Travel Tracker</title>
   </head>
   <body>
-    <h1>Webpack Starter Kit</h1>
-
-    <img src="./images/turing-logo.png" alt="turing logo" height="100px" width="100px">
-
-    <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
+    <header>
+      <nav>
+        <h1 id="welcomeMessage">Welcome</h1>
+        <button id="viewBookedButton">View Booked Trips</button>
+        <button id="bookATripButton">Book A New Trip!</button>
+      </nav>
+    </header>
+    <main>
+      <section id="tripSection">
+        <h4 id=tripCost>Total Amount Spent On Trips: $7587.00</h4>
+        <section id="tripCards">
+          <section>
+            <header>
+              <strong>Sydney, Austrailia</strong>
+              <p>Trip Cost: 1056</p>
+              <p>Number of Travelers: 1</p>
+              <p>Departure Date: "2019/09/16"</p>
+              <p>Days on Vacation: 8</p>
+            </header>
+            <img class="tripImg" src="https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"
+              alt="opera house and city buildings on the water with boats">
+            <strong>Pending: Approved</strong>
+            <p>Cost of Trip: 6611</p>
+          </section>
+        </section>
+      </section>
+    </main>
   </body>
 </html>
