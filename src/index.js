@@ -1,5 +1,6 @@
 import './css/index.scss';
-import 
+import domUpdates from './domUpdates';
+import User from './User';
 
 
 const getDestinationData = () => fetch("http://localhost:3001/api/v1/destinations")
@@ -26,7 +27,7 @@ const checkForError = response => {
     }
 }
 
-let travelerData, tripData, destinationData;
+let travelerData, tripData, destinationData, user;
 
 
 window.onload = onStartup();
@@ -34,9 +35,11 @@ window.onload = onStartup();
 function onStartup() {
     getData()
         .then(([getTravelerData, getTripData, getDestinationData])=> {
-            travelerData = getTravelerData;
-            tripData = getTripData;
-            destinationData = getDestinationData;
-            
+            travelerData = getTravelerData
+            tripData = getTripData
+            destinationData = getDestinationData
+            user = new User(travelerData.travelers[20], tripData.trips, destinationData.destinations)
+            domUpdates.displayTrips(user);
+            domUpdates.greetUser(user);
         });
 }
