@@ -110,7 +110,7 @@ function checkLogin() {
         domUpdates.loginError();
         return
     }
-    loginUser(foundUser);
+    loginUser(userCheck);
 }
 
 function clearValue(username, password) {
@@ -124,10 +124,15 @@ function findUser(userCheck) {
 }
 
 function loginUser(userIndex) {
-    user = new User(travelerData.travelers[userIndex], tripData.trips, destinationData.destinations);
-    domUpdates.displayTrips(user);
-    domUpdates.greetUser(user);
-    domUpdates.displayTripRequest();
+    fetch(`http://localhost:3001/api/v1/travelers/${userIndex}`)
+        .then(response => checkForError(response))
+        .then(response => {
+            user = new User(response, tripData.trips, destinationData.destinations);
+            domUpdates.displayTrips(user);
+            domUpdates.greetUser(user);
+            domUpdates.displayTripRequest();
+        })
+        .catch(err => console.log(err))
 }
 
 function updateUser(tripObj) {
