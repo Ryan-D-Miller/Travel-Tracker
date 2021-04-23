@@ -55,6 +55,12 @@ h2 {
     font-size: 1.5em;
 }
 
+.login {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
 @media screen and (max-width: 900px) {
     form {
         display: grid;
