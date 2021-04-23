@@ -56,6 +56,15 @@ let domUpdates = {
         document.getElementById('durationError').innerText = "";
         document.getElementById('guestError').innerText = "";
         document.getElementById('destError').innerText = "";
+        document.getElementById('loginError').innerText = "";
+    },
+
+    loginError() {
+        document.getElementById('loginError').innerText = "Username or Password is incorrect. Please TryAgain"
+    },
+    displayTripRequest() {
+        document.getElementById('tripForm').classList.remove('hidden');
+        document.getElementById('login').classList.add('hidden');
     }
 }
 

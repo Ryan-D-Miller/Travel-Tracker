@@ -15,12 +15,14 @@
               <div>
                 <label for="UserName">Username</label>
                 <input type="text" id="username" placeholder="Username">
-                <p class="error" id="usernameError"></p>
               </div>
               <div>
                 <label for="Password">Password</label>
                 <input type="password" id="password" placeholder="Password">
-                <p class="error" id="passwordError"></p>
+                <p class="error" id="loginError"></p>
+              </div>
+              <div class="submit-section">
+                <input aria-label="submit-button" value="Submit" class="submit" id="loginSubmit" type="submit">
               </div>
             </div>
           </section>
@@ -58,7 +60,7 @@
         </section>
       </section>
       <section id="tripSection">
-        <h3 id=tripCost>Total Amount Spent On Trips:</h4>
+        <h3 id=tripCost></h4>
         <section class="trip-cards" id="tripCards">
         </section>
       </section>

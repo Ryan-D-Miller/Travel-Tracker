@@ -2,7 +2,8 @@ import './css/index.scss';
 import domUpdates from './domUpdates';
 import User from './User';
 
-const submitButton = document.getElementById('tripRequestSubmit');
+const submitTripButton = document.getElementById('tripRequestSubmit');
+const submitLoginButton = document.getElementById('loginSubmit');
 
 
 const getDestinationData = () => fetch("http://localhost:3001/api/v1/destinations")
@@ -31,7 +32,8 @@ const checkForError = response => {
 
 let travelerData, tripData, destinationData, user;
 
-submitButton.addEventListener('click', submitTripForm);
+submitTripButton.addEventListener('click', submitTripForm);
+submitLoginButton.addEventListener('click', checkLogin);
 
 window.onload = onStartup();
 
@@ -42,9 +44,6 @@ function onStartup() {
             tripData = getTripData
             destinationData = getDestinationData
             domUpdates.displayDestinations(destinationData)
-            user = new User(travelerData.travelers[2], tripData.trips, destinationData.destinations)
-            domUpdates.displayTrips(user);
-            domUpdates.greetUser(user);
         });
 }
 
@@ -87,6 +86,48 @@ function submitTripForm() {
             .then(response => updateUser(tripObj))
             .catch(err => console.log(`POST Request Error: ${err.message}`))
     }
+}
+
+function checkLogin() {
+    domUpdates.removeErrors();
+    const username = document.getElementById('username');
+    const password = document.getElementById('password');
+    let userCheck = username.value.substring(0, 8);
+    if(userCheck !== 'traveler') {
+        clearValue(username, password);
+        domUpdates.loginError();
+        return
+    }
+    userCheck = username.value.substring(8);
+    const foundUser = findUser(userCheck);
+    if(foundUser === -1) {
+        clearValue(username, password);
+        domUpdates.loginError();
+        return
+    }
+    if(password.value !== 'travel2020') {
+        clearValue(username, password);
+        domUpdates.loginError();
+        return
+    }
+    loginUser(foundUser);
+}
+
+function clearValue(username, password) {
+    username.value = "";
+    password.value = "";
+}
+
+function findUser(userCheck) {
+    const userIndex = travelerData.travelers.findIndex(data => data.id === Number(userCheck));
+    return userIndex;
+}
+
+function loginUser(userIndex) {
+    user = new User(travelerData.travelers[userIndex], tripData.trips, destinationData.destinations);
+    domUpdates.displayTrips(user);
+    domUpdates.greetUser(user);
+    domUpdates.displayTripRequest();
 }
 
 function updateUser(tripObj) {
