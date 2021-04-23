@@ -7,41 +7,60 @@
     <header class="main-header">
         <h1 id="welcomeMessage">Welcome</h1>
     </header>
-    <main>
+    <main class="">
       <section class="trip-request-section">
         <section id="tripRequest" class="trip-request">
-          <h2>Book a new trip!</h3>
-          <form class="request-box">
+          <section id="login" class='login'>
             <div>
-              <label for="checkIn">Choice Departure Data</label>
-              <input type="date" id="checkIn" placeholder="Check-in">
-              <p class="error" id="checkInError"></p>
+              <div>
+                <label for="UserName">Username</label>
+                <input type="text" id="username" placeholder="Username">
+              </div>
+              <div>
+                <label for="Password">Password</label>
+                <input type="password" id="password" placeholder="Password">
+                <p class="error" id="loginError"></p>
+              </div>
+              <div class="submit-section">
+                <input aria-label="submit-button" value="Submit" class="submit" id="loginSubmit" type="submit">
+              </div>
             </div>
-            <div>
-              <label for="duration">Duration of Vaction</label>
-              <input type="number" id="duration" placeholder="Duartion">
-              <p class="error" id="durationError"></p>
+          </section>
+          <div id="tripForm" class="hidden">
+            <h2>Book a new trip!</h3>
+            <form class="request-box">
+              <div>
+                <label for="checkIn">Choice Departure Data</label>
+                <input type="date" id="checkIn" placeholder="Check-in">
+                <p class="error" id="checkInError"></p>
+              </div>
+              <div>
+                <label for="duration">Duration of Vaction</label>
+                <input type="number" id="duration" placeholder="Duartion">
+                <p class="error" id="durationError"></p>
+              </div>
+              <div>
+                <label for="numberGuests">Number of Guests</label>
+                <input type="number" id="numberGuests" placeholder="# Guests">
+                <p class="error" id="guestError"></p>
+              </div>
+              <div>
+                <label for="tripSelection">Choose Destination</label>
+                <select id="tripSelection">
+                  <option value="">--Please choose Destination--</option>
+                </select>
+                <p class="error" id="destError"></p>
+              </div>
+            </form>
+            <div class="submit-section">
+              <input aria-label="submit-button" value="Submit" class="submit" id="tripRequestSubmit" type="submit">
             </div>
-            <div>
-              <label for="numberGuests">Number of Guests</label>
-              <input type="number" id="numberGuests" placeholder="# Guests">
-              <p class="error" id="guestError"></p>
-            </div>
-            <div>
-              <label for="tripSelection">Choose Destination</label>
-              <select id="tripSelection">
-                <option value="">--Please choose Destination--</option>
-              </select>
-              <p class="error" id="destError"></p>
-            </div>
-          </form>
-          <div class="submit-section">
-            <input aria-label="submit-button" value="Submit" class="submit" id="tripRequestSubmit" type="submit">
+            </h2>
           </div>
         </section>
       </section>
       <section id="tripSection">
-        <h3 id=tripCost>Total Amount Spent On Trips:</h4>
+        <h3 id=tripCost></h4>
         <section class="trip-cards" id="tripCards">
         </section>
       </section>

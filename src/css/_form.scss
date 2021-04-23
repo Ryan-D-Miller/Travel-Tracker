@@ -47,12 +47,19 @@ input, select {
 
 .error {
     color: $error-color;
+    text-align: center;
 }
 
 h2 {
     display: flex;
     justify-content: center;
     font-size: 1.5em;
+}
+
+.login {
+    display: flex;
+    justify-content: center;
+    align-content: center;
 }
 
 @media screen and (max-width: 900px) {
