@@ -40,12 +40,12 @@ class User {
 
     lastYearCost() {
         let today = new Date();
-        let lastYear = today;
+        let lastYear = new Date();
         lastYear.setFullYear(lastYear.getFullYear() - 1);
         let price = this.trips.reduce((acc, trip) => {
             const tripDate = new Date(trip.date);
-            if (tripDate > today && tripDate > lastYear) {
-                return acc + this.tripCost(trip);
+            if (tripDate < today && tripDate > lastYear) {
+                    return acc + this.tripCost(trip);
             }
             return acc;
         }, 0);
