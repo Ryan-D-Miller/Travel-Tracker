@@ -28,8 +28,10 @@ let domUpdates = {
     greetUser(user) {
         const greeting = document.getElementById('welcomeMessage');
         const tripCost = document.getElementById('tripCost');
+        const tripCostYear = document.getElementById('tripCostYear');
         greeting.innerText = `Welcome ${user.name}!`
-        tripCost.innerText = `Total Amount Spent On Trips: $${user.totalTripCost()} Total Amount Spent on Trips in the last Year: ${user.lastYearCost()}`
+        tripCost.innerText = `Total Amount Spent On Trips: $${user.totalTripCost()}`;
+        tripCostYear.innerText = `Total Amount Spent on Trips in the Last Year: ${ user.lastYearCost() }`;
     }, 
     checkIfFilledIn(checkInEle, durationEle, guestEle, destEle) {
         let filledIn = true;
