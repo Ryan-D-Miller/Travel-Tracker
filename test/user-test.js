@@ -189,4 +189,7 @@ describe('User', function() {
     it('should calculate the total cost of all trips for a user', function() {
         expect(user.totalTripCost()).to.equal(7667);
     });
+    it('should calculate the total cost of trip from the last year based on todays date', function() {
+        expect(user.lastYearCost()).to.equal(6611);
+    });
 });
