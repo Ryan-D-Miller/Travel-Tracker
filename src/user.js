@@ -37,6 +37,21 @@ class User {
         }, 0);
         return totalCost;
     }
+
+    lastYearCost() {
+        let today = new Date();
+        let lastYear = new Date();
+        lastYear.setFullYear(lastYear.getFullYear() - 1);
+        let price = this.trips.reduce((acc, trip) => {
+            const tripDate = new Date(trip.date);
+            if (tripDate < today && tripDate > lastYear) {
+                    return acc + this.tripCost(trip);
+            }
+            return acc;
+        }, 0);
+        return price;
+    }
+
 }
 
 export default User;
