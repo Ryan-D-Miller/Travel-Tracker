@@ -27,6 +27,8 @@ class TripRepository {
         return cost;
     }
 
+
+
     totalTripCost() {
         const totalCost = this.trips.reduce((acc, trip) => {
             return acc + this.tripCost(trip);

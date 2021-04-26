@@ -194,4 +194,7 @@ describe('Agent', function () {
             }
         }])
     });
+    it('should be a able to calculate the amount an agent has made in the last year', function() {
+        expect(agent.yearToDateMoney()).to.equal(1171);
+    });
 });
