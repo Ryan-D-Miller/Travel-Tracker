@@ -82,7 +82,7 @@ function rejectTrip(id) {
     .then(response => {
         checkForError(response)
     })
-    .then(response => console.log(response))
+    .then(response => removeTrip(id))
     .catch(err => console.log(`POST Request Error: ${err.message}`))
 }
 
@@ -194,5 +194,12 @@ function updateAgent(id) {
     const index = user.trips.trips.findIndex(trip => trip.id === Number(id));
     user.trips.trips[index].status = 'approved';
     domUpdates.agentMessage(`Apporved Trip to ${user.trips.trips[index].destinationInfo.destination}`);
+    domUpdates.displayAgentInfo(user);
+}
+
+function removeTrip(id) {
+    const index = user.trips.trips.findIndex(trip => trip.id === Number(id));
+    domUpdates.agentMessage(`Removed Trip to ${user.trips.trips[index].destinationInfo.destination}`);
+    user.trips.trips.splice(index, 1);
     domUpdates.displayAgentInfo(user);
 }
