@@ -85,7 +85,7 @@ function rejectTrip(id) {
         checkForError(response)
     })
     .then(response => removeTrip(id))
-    //.catch(err => console.log(`POST Request Error: ${err.message}`))
+    .catch(err => console.log(`POST Request Error: ${err.message}`))
 }
 
 function submitTripForm() {
