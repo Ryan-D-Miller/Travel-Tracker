@@ -6,6 +6,7 @@ import TripRepository from './TripRepository';
 
 const submitTripButton = document.getElementById('tripRequestSubmit');
 const submitLoginButton = document.getElementById('loginSubmit');
+const tripArea = document.getElementById('tripSection');
 
 
 const getDestinationData = () => fetch("http://localhost:3001/api/v1/destinations")
@@ -36,6 +37,7 @@ let travelerData, tripData, destinationData, user;
 
 submitTripButton.addEventListener('click', submitTripForm);
 submitLoginButton.addEventListener('click', checkLogin);
+tripArea.addEventListener('click', cardButtonCheck);
 
 window.onload = onStartup();
 
@@ -47,6 +49,41 @@ function onStartup() {
             destinationData = getDestinationData
             domUpdates.displayDestinations(destinationData)
         });
+}
+
+function cardButtonCheck(event) {
+    if (event.target.id === 'acceptTrip') {
+        acceptTrip(event.target.dataset.id);
+    } else if (event.target.id === 'rejectTrip') {
+        rejectTrip(event.target.dataset.id);
+    }
+}
+
+function acceptTrip(id) {
+    const tripObj = { id: Number(id), status: 'approved'};
+    return fetch("http://localhost:3001/api/v1/updateTrip", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(tripObj)
+    })
+        .then(response => {
+            checkForError(response)
+        })
+        .then(response => updateAgent(id))
+        .catch(err => console.log(`POST Request Error: ${err.message}`))
+}
+
+function rejectTrip(id) {
+    return fetch(`http://localhost:3001/api/v1/trips/${id}`, {
+        method: 'DELETE',
+    })
+    .then(response => {
+        checkForError(response)
+    })
+    .then(response => console.log(response))
+    .catch(err => console.log(`POST Request Error: ${err.message}`))
 }
 
 function submitTripForm() {
@@ -151,4 +188,11 @@ function updateUser(tripObj) {
     user.trips = new TripRepository(user.findMyTrips(tripData.trips), destinationData.destinations);
     domUpdates.displayTrips(user);
     domUpdates.greetUser(user);
+}
+
+function updateAgent(id) {
+    const index = user.trips.trips.findIndex(trip => trip.id === Number(id));
+    user.trips.trips[index].status = 'approved';
+    domUpdates.agentMessage(`Apporved Trip to ${user.trips.trips[index].destinationInfo.destination}`);
+    domUpdates.displayAgentInfo(user);
 }

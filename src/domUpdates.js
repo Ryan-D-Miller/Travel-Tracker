@@ -75,7 +75,11 @@ let domUpdates = {
         pendingTrip.forEach(trip => {
             cardArea.insertAdjacentHTML('afterbegin', `
                 <section class="trip-card" style="background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.5)), url('${trip.destinationInfo.image}');">
-                    <section class=${trip.status}> <strong>Status: ${trip.status}</strong></section>
+                    <section class=${trip.status}> 
+                        <strong>Status: ${trip.status}</strong>
+                        <button data-id=${trip.id} id="acceptTrip" class="acceptButton">Accept</button>
+                        <button data-id=${trip.id} id="rejectTrip" class="rejectButton">Reject</button>
+                    </section>
                     <header class="trip-header">
                         <strong>${trip.destinationInfo.destination}</strong>
                         <p>Trip Cost: $${agent.trips.tripCost(trip)}</p>
@@ -95,6 +99,11 @@ let domUpdates = {
         greeting.innerText = `Welcome Agency!`;
         tripCost.innerText = `Travelers on Vacation Today!: ${agent.trips.travelersToday(new Date())}`;
         tripCostYear.innerText = `Total income from last year: $${agent.yearToDateMoney()}`;
+    }, 
+    agentMessage(message) {
+        console.log(message);
+        const agentMessageSpan = document.getElementById('agentMessage');
+        agentMessageSpan.innerText = message;
     }
 }
 
