@@ -1,6 +1,7 @@
 import './css/index.scss';
 import domUpdates from './domUpdates';
 import User from './User';
+import TripRepository from './TripRepository';
 
 const submitTripButton = document.getElementById('tripRequestSubmit');
 const submitLoginButton = document.getElementById('loginSubmit');
@@ -137,7 +138,7 @@ function loginUser(userIndex) {
 
 function updateUser(tripObj) {
     tripData.trips.push(tripObj);
-    user.trips = user.findMyTrips(tripData.trips, destinationData.destinations);
+    user.trips = new TripRepository(user.findMyTrips(tripData.trips), destinationData.destinations);
     domUpdates.displayTrips(user);
     domUpdates.greetUser(user);
 }

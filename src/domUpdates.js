@@ -9,13 +9,13 @@ let domUpdates = {
     },
     displayTrips(user) {
         cardArea.innerHTML = "";
-        user.trips.forEach(trip => {
+        user.trips.trips.forEach(trip => {
             cardArea.insertAdjacentHTML('afterbegin', `
                 <section class="trip-card" style="background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.5)), url('${trip.destinationInfo.image}');">
                     <section class=${trip.status}> <strong>Status: ${trip.status}</strong></section>
                     <header class="trip-header">
                         <strong>${trip.destinationInfo.destination}</strong>
-                        <p>Trip Cost: $${user.tripCost(trip)}</p>
+                        <p>Trip Cost: $${user.trips.tripCost(trip)}</p>
                     </header>
                      <div class="trip-body">
                         <p>Number of Travelers: ${trip.travelers}</p>
@@ -30,8 +30,8 @@ let domUpdates = {
         const tripCost = document.getElementById('tripCost');
         const tripCostYear = document.getElementById('tripCostYear');
         greeting.innerText = `Welcome ${user.name}!`
-        tripCost.innerText = `Total Amount Spent On Trips: $${user.totalTripCost()}`;
-        tripCostYear.innerText = `Total Amount Spent on Trips in the Last Year: ${ user.lastYearCost() }`;
+        tripCost.innerText = `Total Amount Spent On Trips: $${user.trips.totalTripCost()}`;
+        tripCostYear.innerText = `Total Amount Spent on Trips in the Last Year: ${ user.trips.lastYearCost() }`;
     }, 
     checkIfFilledIn(checkInEle, durationEle, guestEle, destEle) {
         let filledIn = true;

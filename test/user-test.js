@@ -2,6 +2,7 @@ import chai from 'chai';
 const expect = chai.expect;
 
 import User from '../src/User';
+import TripRepository from '../src/TripRepository';
 
 const travelersTestData = [{
     "id": 1,
@@ -115,6 +116,7 @@ let user;
 describe('User', function() {
     beforeEach(function() {
         user = new User(travelersTestData[2], tripTestData, destinationTestData);
+        console.log(user.trips);
     });
     it('should be a function', function() {
         expect(User).to.be.a('function');
@@ -125,7 +127,7 @@ describe('User', function() {
         expect(user.travelerType).to.equal("shopper");
     });
     it('should take in an array of trips and find the trips that are for that user and save them to their trips array', function() {
-        expect(user.trips).to.eql([{
+        expect(user.trips.trips).to.eql([{
             "id": 1,
             "userID": 3,
             "destinationID": 1,
@@ -161,35 +163,7 @@ describe('User', function() {
             }
         }]);
     });
-    it('should be able to return a trip specified by an ID', function() {
-        expect(user.getTrip(1)).to.eql({
-            "id": 1,
-            "userID": 3,
-            "destinationID": 1,
-            "travelers": 1,
-            "date": "2019/09/16",
-            "duration": 8,
-            "status": "approved",
-            "suggestedActivities": [],
-            "destinationInfo": {
-                "id": 1,
-                "destination": "Lima, Peru",
-                "estimatedLodgingCostPerDay": 70,
-                "estimatedFlightCostPerPerson": 400,
-                "image": "https://images.unsplash.com/photo-1489171084589-9b5031ebcf9b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80",
-                "alt": "overview of city buildings with a clear sky"
-            }
-        })
-        expect(user.getTrip(75)).to.equal("No Trip Found!");
-    });
-    it('should be able to return the cost of a specified trip with 10 perfect for travel agent fees', function() {
-        expect(user.tripCost(user.trips[0])).to.equal(1056);
-        expect(user.tripCost(user.trips[1])).to.equal(6611);
-    });
-    it('should calculate the total cost of all trips for a user', function() {
-        expect(user.totalTripCost()).to.equal(7667);
-    });
-    it('should calculate the total cost of trip from the last year based on todays date', function() {
-        expect(user.lastYearCost()).to.equal(6611);
+    it('should calculate the total cost of all trips for a user', function () {
+        expect(user.trips.totalTripCost()).to.equal(7667);
     });
 });
