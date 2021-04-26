@@ -1,6 +1,7 @@
 import './css/index.scss';
 import domUpdates from './domUpdates';
 import User from './User';
+import Agent from './Agent';
 import TripRepository from './TripRepository';
 
 const submitTripButton = document.getElementById('tripRequestSubmit');
@@ -94,6 +95,10 @@ function checkLogin() {
     const username = document.getElementById('username');
     const password = document.getElementById('password');
     let userCheck = username.value.substring(0, 8);
+    if(username.value === 'agency' && password.value === 'travel2020') {
+        loginAgent();
+        return;
+    }
     if(userCheck !== 'traveler') {
         clearValue(username, password);
         domUpdates.loginError();
@@ -134,6 +139,11 @@ function loginUser(userIndex) {
             domUpdates.displayTripRequest();
         })
         .catch(err => console.log(err))
+}
+
+function loginAgent() {
+    user = new Agent(tripData.trips, destinationData.destinations);
+    domUpdates.displayAgentInfo(user);
 }
 
 function updateUser(tripObj) {

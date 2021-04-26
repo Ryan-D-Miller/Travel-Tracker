@@ -27,8 +27,6 @@ class TripRepository {
         return cost;
     }
 
-
-
     totalTripCost() {
         const totalCost = this.trips.reduce((acc, trip) => {
             return acc + this.tripCost(trip);
@@ -56,6 +54,7 @@ class TripRepository {
 
     travelersToday(date) {
         const checkDate = new Date(date);
+        console.log(checkDate);
         const travelers = this.trips.reduce((acc, trip) => {
             const startDate = new Date(trip.date);
             let endDate = new Date(trip.date);

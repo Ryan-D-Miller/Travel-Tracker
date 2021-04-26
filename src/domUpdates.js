@@ -31,7 +31,7 @@ let domUpdates = {
         const tripCostYear = document.getElementById('tripCostYear');
         greeting.innerText = `Welcome ${user.name}!`
         tripCost.innerText = `Total Amount Spent On Trips: $${user.trips.totalTripCost()}`;
-        tripCostYear.innerText = `Total Amount Spent on Trips in the Last Year: ${ user.trips.lastYearCost() }`;
+        tripCostYear.innerText = `Total Amount Spent on Trips in the Last Year: $${ user.trips.lastYearCost() }`;
     }, 
     checkIfFilledIn(checkInEle, durationEle, guestEle, destEle) {
         let filledIn = true;
@@ -67,6 +67,34 @@ let domUpdates = {
     displayTripRequest() {
         document.getElementById('tripForm').classList.remove('hidden');
         document.getElementById('login').classList.add('hidden');
+    }, 
+    displayAgentInfo(agent) {
+        this.displayAgentGreeting(agent);
+        cardArea.innerHTML = "";
+        const pendingTrip = agent.trips.filterTrips('pending')
+        pendingTrip.forEach(trip => {
+            cardArea.insertAdjacentHTML('afterbegin', `
+                <section class="trip-card" style="background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.5)), url('${trip.destinationInfo.image}');">
+                    <section class=${trip.status}> <strong>Status: ${trip.status}</strong></section>
+                    <header class="trip-header">
+                        <strong>${trip.destinationInfo.destination}</strong>
+                        <p>Trip Cost: $${agent.trips.tripCost(trip)}</p>
+                    </header>
+                     <div class="trip-body">
+                        <p>Number of Travelers: ${trip.travelers}</p>
+                        <p>Departure Date: ${trip.date}</p>
+                        <p>Days on Vacation: ${trip.duration}</p>
+                    </div>
+                </section>`);
+        });
+    },
+    displayAgentGreeting(agent) {
+        const greeting = document.getElementById('welcomeMessage');
+        const tripCost = document.getElementById('tripCost');
+        const tripCostYear = document.getElementById('tripCostYear');
+        greeting.innerText = `Welcome Agency!`;
+        tripCost.innerText = `Travelers on Vacation Today!: ${agent.trips.travelersToday(new Date())}`;
+        tripCostYear.innerText = `Total income from last year: $${agent.yearToDateMoney()}`;
     }
 }
 
