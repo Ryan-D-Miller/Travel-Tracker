@@ -8,11 +8,16 @@ class User {
 
     findMyTrips(tripData, destinationData) {
         let myTrips = tripData.filter(trip => trip.userID === this.id);
-        myTrips.forEach(trip => {
+        myTrips = this.setTripDest(myTrips, destinationData);
+        return myTrips;
+    }
+
+    setTripDest(trips ,destinationData) {
+        trips.forEach(trip => {
             const destinationIndex = destinationData.findIndex(destination => destination.id === trip.destinationID);
             trip.destinationInfo = destinationData[destinationIndex];
         });
-        return myTrips;
+        return trips;
     }
 
     getTrip(tripID) {
