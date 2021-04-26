@@ -2,7 +2,6 @@ import chai from 'chai';
 const expect = chai.expect;
 
 import User from '../src/User';
-import TripRepository from '../src/TripRepository';
 
 const travelersTestData = [{
     "id": 1,
@@ -116,7 +115,6 @@ let user;
 describe('User', function() {
     beforeEach(function() {
         user = new User(travelersTestData[2], tripTestData, destinationTestData);
-        console.log(user.trips);
     });
     it('should be a function', function() {
         expect(User).to.be.a('function');

@@ -47,6 +47,10 @@ class TripRepository {
         }, 0);
         return price;
     }
+
+    filterTrips(status) {
+        return this.trips.filter(trip => trip.status === status); 
+    }
 }
 
 export default TripRepository;
