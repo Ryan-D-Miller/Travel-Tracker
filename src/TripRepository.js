@@ -51,6 +51,20 @@ class TripRepository {
     filterTrips(status) {
         return this.trips.filter(trip => trip.status === status); 
     }
+
+    travelersToday(date) {
+        const checkDate = new Date(date);
+        const travelers = this.trips.reduce((acc, trip) => {
+            const startDate = new Date(trip.date);
+            let endDate = new Date(trip.date);
+            endDate.setDate(endDate.getDate() + trip.duration);
+            if(checkDate >= startDate && endDate >= checkDate) {
+                return acc + trip.travelers;
+            }
+            return acc;
+        }, 0);
+        return travelers;
+    }
 }
 
 export default TripRepository;

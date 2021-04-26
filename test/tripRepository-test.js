@@ -29,7 +29,7 @@ const tripTestData = [
         "userID": 3,
         "destinationID": 3,
         "travelers": 4,
-        "date": "2020/05/22",
+        "date": "2020/10/04",
         "duration": 17,
         "status": "pending",
         "suggestedActivities": []
@@ -136,7 +136,7 @@ describe('TripRepository', function () {
             "userID": 3,
             "destinationID": 3,
             "travelers": 4,
-            "date": "2020/05/22",
+            "date": "2020/10/04",
             "duration": 17,
             "status": "pending",
             "suggestedActivities": [],
@@ -149,5 +149,8 @@ describe('TripRepository', function () {
                 "alt": "opera house and city buildings on the water with boats"
             }
         }]);
+    });
+    it('should be able to return the number of travelers out on a given day', function () {
+        expect(tripRepository.travelersToday("2020/10/05")).to.equal(9);
     });
 });
