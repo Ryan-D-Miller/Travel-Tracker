@@ -65,6 +65,11 @@ class TripRepository {
         }, 0);
         return travelers;
     }
+
+    userTrips(userID) {
+        const userTrips = this.trips.filter(trip => trip.userID === userID)
+        return userTrips;
+    }
 }
 
 export default TripRepository;

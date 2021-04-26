@@ -6,6 +6,7 @@ import TripRepository from './TripRepository';
 
 const submitTripButton = document.getElementById('tripRequestSubmit');
 const submitLoginButton = document.getElementById('loginSubmit');
+const userSelectSubmit = document.getElementById('userSelectSubmit');
 const tripArea = document.getElementById('tripSection');
 
 
@@ -37,6 +38,7 @@ let travelerData, tripData, destinationData, user;
 
 submitTripButton.addEventListener('click', submitTripForm);
 submitLoginButton.addEventListener('click', checkLogin);
+userSelectSubmit.addEventListener('click', displayUser);
 tripArea.addEventListener('click', cardButtonCheck);
 
 window.onload = onStartup();
@@ -83,7 +85,7 @@ function rejectTrip(id) {
         checkForError(response)
     })
     .then(response => removeTrip(id))
-    .catch(err => console.log(`POST Request Error: ${err.message}`))
+    //.catch(err => console.log(`POST Request Error: ${err.message}`))
 }
 
 function submitTripForm() {
@@ -180,7 +182,7 @@ function loginUser(userIndex) {
 
 function loginAgent() {
     user = new Agent(tripData.trips, destinationData.destinations);
-    domUpdates.displayAgentInfo(user);
+    domUpdates.displayAgentInfo(user, travelerData);
 }
 
 function updateUser(tripObj) {
@@ -194,12 +196,23 @@ function updateAgent(id) {
     const index = user.trips.trips.findIndex(trip => trip.id === Number(id));
     user.trips.trips[index].status = 'approved';
     domUpdates.agentMessage(`Apporved Trip to ${user.trips.trips[index].destinationInfo.destination}`);
-    domUpdates.displayAgentInfo(user);
+    domUpdates.displayAgentInfo(user, travelerData);
 }
 
 function removeTrip(id) {
     const index = user.trips.trips.findIndex(trip => trip.id === Number(id));
     domUpdates.agentMessage(`Removed Trip to ${user.trips.trips[index].destinationInfo.destination}`);
     user.trips.trips.splice(index, 1);
-    domUpdates.displayAgentInfo(user);
+    domUpdates.displayAgentInfo(user, travelerData);
+}
+
+function displayUser() {
+    domUpdates.removeErrors();
+    const travelerSelected = document.getElementById('travelerSelect');
+    if(travelerSelected.value !== "") {
+        domUpdates.agentDisplayUserSelectTrips(user.trips.userTrips(Number(travelerSelected.value)), user);
+    } else {
+        domUpdates.agentTravelerSelectError();
+    }
+
 }

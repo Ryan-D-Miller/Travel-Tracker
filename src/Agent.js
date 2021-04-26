@@ -25,6 +25,8 @@ class Agent {
         agentCost = cost * .1;
         return agentCost;
     }
+
+
 }
 
 export default Agent;
