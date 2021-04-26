@@ -1,9 +1,13 @@
 import './css/index.scss';
 import domUpdates from './domUpdates';
 import User from './User';
+import Agent from './Agent';
+import TripRepository from './TripRepository';
 
 const submitTripButton = document.getElementById('tripRequestSubmit');
 const submitLoginButton = document.getElementById('loginSubmit');
+const userSelectSubmit = document.getElementById('userSelectSubmit');
+const tripArea = document.getElementById('tripSection');
 
 
 const getDestinationData = () => fetch("http://localhost:3001/api/v1/destinations")
@@ -34,6 +38,8 @@ let travelerData, tripData, destinationData, user;
 
 submitTripButton.addEventListener('click', submitTripForm);
 submitLoginButton.addEventListener('click', checkLogin);
+userSelectSubmit.addEventListener('click', displayUser);
+tripArea.addEventListener('click', cardButtonCheck);
 
 window.onload = onStartup();
 
@@ -45,6 +51,41 @@ function onStartup() {
             destinationData = getDestinationData
             domUpdates.displayDestinations(destinationData)
         });
+}
+
+function cardButtonCheck(event) {
+    if (event.target.id === 'acceptTrip') {
+        acceptTrip(event.target.dataset.id);
+    } else if (event.target.id === 'rejectTrip') {
+        rejectTrip(event.target.dataset.id);
+    }
+}
+
+function acceptTrip(id) {
+    const tripObj = { id: Number(id), status: 'approved'};
+    return fetch("http://localhost:3001/api/v1/updateTrip", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(tripObj)
+    })
+        .then(response => {
+            checkForError(response)
+        })
+        .then(response => updateAgent(id))
+        .catch(err => console.log(`POST Request Error: ${err.message}`))
+}
+
+function rejectTrip(id) {
+    return fetch(`http://localhost:3001/api/v1/trips/${id}`, {
+        method: 'DELETE',
+    })
+    .then(response => {
+        checkForError(response)
+    })
+    .then(response => removeTrip(id))
+    .catch(err => console.log(`POST Request Error: ${err.message}`))
 }
 
 function submitTripForm() {
@@ -93,6 +134,10 @@ function checkLogin() {
     const username = document.getElementById('username');
     const password = document.getElementById('password');
     let userCheck = username.value.substring(0, 8);
+    if(username.value === 'agency' && password.value === 'travel2020') {
+        loginAgent();
+        return;
+    }
     if(userCheck !== 'traveler') {
         clearValue(username, password);
         domUpdates.loginError();
@@ -135,9 +180,39 @@ function loginUser(userIndex) {
         .catch(err => console.log(err))
 }
 
+function loginAgent() {
+    user = new Agent(tripData.trips, destinationData.destinations);
+    domUpdates.displayAgentInfo(user, travelerData);
+}
+
 function updateUser(tripObj) {
     tripData.trips.push(tripObj);
-    user.trips = user.findMyTrips(tripData.trips, destinationData.destinations);
+    user.trips = new TripRepository(user.findMyTrips(tripData.trips), destinationData.destinations);
     domUpdates.displayTrips(user);
     domUpdates.greetUser(user);
+}
+
+function updateAgent(id) {
+    const index = user.trips.trips.findIndex(trip => trip.id === Number(id));
+    user.trips.trips[index].status = 'approved';
+    domUpdates.agentMessage(`Apporved Trip to ${user.trips.trips[index].destinationInfo.destination}`);
+    domUpdates.displayAgentInfo(user, travelerData);
+}
+
+function removeTrip(id) {
+    const index = user.trips.trips.findIndex(trip => trip.id === Number(id));
+    domUpdates.agentMessage(`Removed Trip to ${user.trips.trips[index].destinationInfo.destination}`);
+    user.trips.trips.splice(index, 1);
+    domUpdates.displayAgentInfo(user, travelerData);
+}
+
+function displayUser() {
+    domUpdates.removeErrors();
+    const travelerSelected = document.getElementById('travelerSelect');
+    if(travelerSelected.value !== "") {
+        domUpdates.agentDisplayUserSelectTrips(user.trips.userTrips(Number(travelerSelected.value)), user);
+    } else {
+        domUpdates.agentTravelerSelectError();
+    }
+
 }

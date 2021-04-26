@@ -26,8 +26,22 @@
               </div>
             </div>
           </section>
+          <section id='userSelectSection' class ='hidden'>
+            <div class ='login'>
+              <div>
+                <label for="travelerSelect">View Traveler</label>
+                <select id="travelerSelect">
+                  <option value="">--Select Traveler--</option>
+                </select>
+                <p class="error" id="travelerError"></p>
+                <div class="submit-section">
+                  <input aria-label="submit-button" value="Submit" class="submit" id="userSelectSubmit" type="submit">
+                </div>
+              </div>
+            </div>
+          </section>
           <div id="tripForm" class="hidden">
-            <h2>Book a new trip!</h3>
+            <h3>Book a new trip!</h3>
             <form class="request-box">
               <div>
                 <label for="checkIn">Choice Departure Data</label>
@@ -55,13 +69,13 @@
             <div class="submit-section">
               <input aria-label="submit-button" value="Submit" class="submit" id="tripRequestSubmit" type="submit">
             </div>
-            </h2>
           </div>
         </section>
       </section>
       <section id="tripSection">
-        <h4 id=tripCost></h4>
-        <h4 id=tripCostYear></h4>
+        <h4 id="tripCost"></h4>
+        <h4 id="tripCostYear"></h4>
+        <h4 id="agentMessage"></h4>
         <section class="trip-cards" id="tripCards">
         </section>
       </section>
