@@ -18,6 +18,14 @@
 * Run `npm start` on both repos, you'll need two Terminal tabs/windows to do so
 * Type `localhost:8080` into your browser's URL once both local servers are running!
 
+## In app intructions
+* To login type 
+* Username: traveler<1 - 50> (ex. traveler35
+* Password travel2020
+* To login as admin
+* Username: agency
+* Password: travel2020
+
 ## Visual Demo:
 <p align="left">User Login</br>
  <img width="1000" height="500" src="./src/images/gifDemo.gif">
